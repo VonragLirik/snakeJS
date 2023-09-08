@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Змейка</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+
+    <body class="page">
+        <div class="container">
+            <div>
+                <h1 class="title">Змейка</h1>
+                <h3 class="subtitle">
+                    Счет: <span id="score">0</span>
+                </h3>
+                <button id="retry-button">Начать игру</button>
+            </div>
+
+            <canvas id="canvas" width="600px" height="420px"></canvas>
+            
+            <div id="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Позиция</th>
+                            <th>Имя</th>
+                            <th>Результат</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>   
+            
+            <div id="record-content">
+                <h1>Поздравляю, вы попали в таблицу рекордов!</h1>
+                <h3>Чтобы сохранить ваш результат - введите ваше имя ниже</h3>
+                <input id="input" class="name-input" placeholder="Введите ваше имя" />
+                <button id="retry-button" class="submit-button">Подтвердить</button>
+            </div>
+        </div>
+    </body>
+</html>
