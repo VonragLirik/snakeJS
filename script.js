@@ -13,8 +13,6 @@ window.onload = function () {
   const canvasWidth = canvas.width;
   const canvasHeight = canvas.height;
 
-  console.log("submitButton", submitButton);
-
   let game_loop;
   let score = 0;
   let direction = "right";
@@ -25,20 +23,17 @@ window.onload = function () {
     { name: "Кирилл", score: 31 },
     { name: "Никита", score: 19 },
     { name: "Ваня", score: 15 },
-    { name: "Кирилл", score: 31 },
-    { name: "Никита", score: 19 },
-    { name: "Ваня", score: 15 },
-    { name: "Кирилл", score: 31 },
-    { name: "Никита", score: 19 },
-    { name: "Ваня", score: 15 },
   ];
 
   const SPEED = 130;
   const CELL_WIDTH = 15;
+  const COUNT_BEST_RECORDS = 10;
 
   function init() {
     canvas.style.display = "block";
     tableContainer.style.display = "none";
+    recordContent.style.display = "none";
+    nameInput.value = "";
     snakeArray = [];
     createSnake();
     createFood();
@@ -56,17 +51,18 @@ window.onload = function () {
     const newItemIndex = records.findIndex((element) => score >= element.score);
     const newItem = { name: nameInput.value, score };
     // если найдено место для рекорда и еще есть место
-    if (newItemIndex === -1 && records.length < 10) {
+    if (newItemIndex === -1 && records.length < COUNT_BEST_RECORDS) {
       records.push(newItem);
     } else {
       // если такой же счет существует - вставляем над ним
       records.splice(newItemIndex, 0, newItem);
       // обрезаем до десяти рекордов
-      records = records.slice(0, 10);
+      records = records.slice(0, COUNT_BEST_RECORDS);
     }
     localStorage.setItem("records", JSON.stringify(records));
     paintTableRecords();
     nameInput.value = "";
+    scoreElement.innerHTML = 0;
     canvas.style.display = "none";
     recordContent.style.display = "none";
     tableContainer.style.display = "flex";
@@ -119,11 +115,18 @@ window.onload = function () {
       checkCollision(nx, ny, snakeArray)
     ) {
       canvas.style.display = "none";
-      if (records.some((rec) => rec.score < score) || records.length <= 10) {
+      // записываем рекорд если побит какой-то рекорд или если меньше 10 рекордов
+      if (
+        records.some((rec) => rec.score < score) ||
+        records.length <= COUNT_BEST_RECORDS - 1
+      ) {
         recordContent.style.display = "flex";
       } else {
         tableContainer.style.display = "flex";
       }
+      direction = "right";
+      clearInterval(game_loop);
+      game_loop = undefined;
       return;
     }
 
