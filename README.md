@@ -4,4 +4,4 @@
 
 ## Stack: JS+CSS+HTML
 
-## All game in canvas
+## All game in canvas + records save in localStorage. Maximum can be 10 records.
