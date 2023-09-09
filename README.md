@@ -1,7 +1,7 @@
-### The legendary snake game
+# The legendary snake game
 
-# Stack: JS+CSS+HTML
+# For start open index.html file
 
-## For start open index.html file
+## Stack: JS+CSS+HTML
 
-# All game in canvas
+## All game in canvas
